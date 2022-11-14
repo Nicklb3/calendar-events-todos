@@ -7,13 +7,15 @@
 $(function () {
 
   const today = dayjs();
-  $("#currentDay").text(today.format("dddd, MMM D YYYY"));
+  $("#currentDay").text(today.format("dddd, MMM D, YYYY"));
 
   const savebtn = $(".saveBtn")
 
-  savebtn.on("click", function () {
-    
-  })
+  saveBtn.on('click', function () {
+    $(this).siblings('.description').get(0).value;
+    let calenderText = $(this).siblings('.description').get(0).value;
+    localStorage.setItem($(this).parent().attr('id'), calenderText);
+  });
 
 
 
