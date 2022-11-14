@@ -1,6 +1,8 @@
 # calendar-events-todos
 
 A calendar to save events and todos
+a todo list app that saves your progress to local storage
+change the color of past present and future todos list items
 
 Github url : https://github.com/Nicklb3/calendar-events-todos.git
 
