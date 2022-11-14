@@ -6,16 +6,22 @@
 
 $(function () {
 
+  // dayjs variable of formatted time for current date
   const today = dayjs();
   $("#currentDay").text(today.format("dddd, MMM D, YYYY"));
 
+  // variable to access button in html file
   const savebtn = $(".saveBtn")
 
+  // button click function to save info on page
   saveBtn.on('click', function () {
     $(this).siblings('.description').get(0).value;
-    let calenderText = $(this).siblings('.description').get(0).value;
+    const calenderText = $(this).siblings('.description').get(0).value;
     localStorage.setItem($(this).parent().attr('id'), calenderText);
   });
+
+  // Array of hours of the day / html id="hour-*"
+  const hoursOfDay = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 
 
 
