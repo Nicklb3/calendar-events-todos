@@ -1,28 +1,42 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-// console.log("hello");
-
-
 $(function () {
+  // variable to show tday of week on top of page
+  let today = dayjs();
+  $('#currentDay').text(today.format('dddd, MMMM D YYYY'));
 
-  // dayjs variable of formatted time for current date
-  const today = dayjs();
-  $("#currentDay").text(today.format("dddd, MMM D YYYY"));
+  // variable fot button
+  let saveBtn = $('.saveBtn');
 
-  // variable to access button in html file
-  const saveBtn = $(".saveBtn")
-
-  // button click function to save info on page
- 
-  var saveBtn = $('.saveBtn');
+  // click function on button 
   saveBtn.on('click', function () {
-    var eventText = $(this).siblings('.description').get(0).value;
-    localStorage.setItem($(this).parent().attr('id'), eventText);
+    $(this).siblings('.description').get(0).value;
+    let calenderText = $(this).siblings('.description').get(0).value;
+    localStorage.setItem($(this).parent().attr('id'), calenderText);
   });
 
-  // Array of hours of the day / html id="hour-*"
-  const hoursOfDay = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+  // array of hours of the work day
+  let hoursOfDay = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 
+  for (i = 0; i < hoursOfDay.length; i++) {
+    let eventStorage = localStorage.getItem('hour-' + hoursOfDay[i]);
+    let hourTextArea = $('#hour-' + hoursOfDay[i] + ' > .description');
+    hourTextArea.textContent = eventStorage;
+  }
 
+  // variable of current hour to be able to add past present and future class
+  let currentHour = dayjs().hour();
+
+  // for loop to add past present and future class to days of week
+  for (var i = 0; i < hoursOfDay.length; i ++) {
+    if (hoursOfDay[i] < currentHour) {
+      $('#hour-' + hoursOfDay[i]).addClass('past');
+    } else if (hoursOfDay[i] == currentHour) {
+      $('#hour-' + hoursOfDay[i]).removeClass('past');
+      $('#hour-' + hoursOfDay[i]).addClass('present');
+    } else {
+      $('#hour-' + hoursOfDay[i]).removeClass('past');
+      $('#hour-' + hoursOfDay[i]).removeClass('present');
+      $('#hour-' + hoursOfDay[i]).addClass('future');
+    }
+  }
 });
+
